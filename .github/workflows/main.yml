@@ -25,11 +25,11 @@ jobs:
       - name: Run and control node script
         run: |
 
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
           git add package-lock.json
           git commit -m "Agrega package-lock.json para builds reproducibles"
           git push
-          git config --global user.name "Mona Lisa"
-          git config --global user.email "email@example.com"
           node index.js &
           NODE_PID=$!
           sleep 19800
