@@ -1,34 +1,32 @@
-name: WhatsApp Bot
-
-on:
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-22.04
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.2.2
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4.4.0
-        with:
-          node-version: "22"
-
-      - name: Prepare environment
-        run: |
-          sudo apt update
-          sudo apt install -y ffmpeg
-          npm install node-gtts whatsapp-web.js
-          sleep 5
-
-      - name: Compress full directory using zip
-        run: |
-          zip -r whatsapp-bot-full.zip .
-
-      - name: Upload compressed project as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: whatsapp-bot-archive
-          path: whatsapp-bot-full.zip
+name: WhatsApp Bot    
+    
+on:    
+  workflow_dispatch:    
+    
+jobs:    
+  build:    
+    runs-on: ubuntu-22.04    
+    
+    steps:    
+      - name: Checkout    
+        uses: actions/checkout@v4.2.2    
+    
+      - name: Setup Node.js environment    
+        uses: actions/setup-node@v4.4.0    
+        with:    
+          node-version: "22"    
+    
+      - name: Prepare environment    
+        run: |    
+          sudo apt update    
+          sudo apt install -y ffmpeg    
+          npm install node-gtts whatsapp-web.js    
+          git config --global user.email "you@example.com"    
+          git config --global user.name "Your Name"
+          git lfs install
+          git lfs track "node_modules/puppeteer-core/.local-chromium/linux-1045629/chrome-linux/chrome"
+          
+          git add .    
+          git commit -m "$(date)"    
+          git push
+    
