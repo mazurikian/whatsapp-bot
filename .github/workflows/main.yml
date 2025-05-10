@@ -22,8 +22,12 @@ jobs:
           sudo apt install -y ffmpeg
           npm install node-gtts whatsapp-web.js
 
-      - name: Upload directory as artifact
+      - name: Compress full directory
+        run: |
+          tar -czf whatsapp-bot-full.tar.gz .
+
+      - name: Upload compressed project as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: whatsapp-bot-artifact
-          path: .
+          name: whatsapp-bot-archive
+          path: whatsapp-bot-full.tar.gz
