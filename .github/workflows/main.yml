@@ -15,14 +15,14 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: "22"
-          cache: "npm" # cachea ~/.npm, pero no node_modules
+          cache: "npm"
 
       - name: Cache node_modules
         uses: actions/cache@v4
         id: node-modules-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
 
