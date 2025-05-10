@@ -15,12 +15,22 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: "22"
+          cache: "npm" # cachea ~/.npm, pero no node_modules
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Prepare environment
         run: |
           sudo apt update
-          sudo apt install ffmpeg
-          npm install
+          sudo apt install -y ffmpeg
+          if [ ! -d node_modules ]; then npm install; fi
 
       - name: Run and control node script
         run: |
