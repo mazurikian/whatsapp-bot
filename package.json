@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "node-gtts": "2.0.2",
+    "whatsapp-web.js": "1.27.0"
+  }
+}
