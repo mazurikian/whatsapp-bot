@@ -15,21 +15,16 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: "22"
+          cache: "npm"
 
       - name: Prepare environment
         run: |
           sudo apt update
           sudo apt install ffmpeg
-          npm install
+          npm ci
 
       - name: Run and control node script
         run: |
-
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
-          git add package-lock.json
-          git commit -m "Agrega package-lock.json para builds reproducibles"
-          git push
           node index.js &
           NODE_PID=$!
           sleep 19800
