@@ -21,22 +21,9 @@ jobs:
           sudo apt update
           sudo apt install -y ffmpeg
           npm install node-gtts whatsapp-web.js
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
-          git add .
-          git commit -m "$(date)"
-          git push
 
-      - name: Run and control node script
-        run: |
-          node index.js &
-          NODE_PID=$!
-          sleep 
-          curl -L \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/main.yml/dispatches \
-            -d '{"ref":"${{ github.ref }}"}'
-          sleep 60
-          kill $NODE_PID
+      - name: Upload directory as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: whatsapp-bot-artifact
+          path: .
